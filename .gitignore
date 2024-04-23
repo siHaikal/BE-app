@@ -1,0 +1,9 @@
+node_modules/
+logs/
+*.log
+config/
+.env
+temp/
+*.tmp
+dist/
+build/
