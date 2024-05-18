@@ -8,13 +8,12 @@ router.post('/', async(req, res) => {
 
     try {
         const bcryptPass = await bcrypt.hash(password, 10)
-        const user = RegisterModels.build({
+        const user = await RegisterModels.create({
             userName, password: bcryptPass, email
         })
-        await user.save()
 
         res.status(200).json({
-            message: "data berhasil ditambahkan",
+            metadata: 'berhasil register',
             data: user
         })
 

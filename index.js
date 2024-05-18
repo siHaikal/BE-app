@@ -9,7 +9,7 @@ const registerEndPoint = require('./Route/register')
 
 app.use(cors())
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: false }))
 
 const sequelize = require('./dbConfig')
 sequelize.sync().then(() => {

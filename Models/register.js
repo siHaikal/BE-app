@@ -1,20 +1,26 @@
 const { DataTypes, Model} = require('sequelize')
 const sequelize = require('../dbConfig')
+class Register extends Model{}
 
-const Register = sequelize.define('Register', {
-    userName: {
-        type: DataTypes.TEXT,
-        allowNull: false,
+Register.init(
+    {
+        userName: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        email: {
+            type: DataTypes.STRING,
+            unique: true
+        }
     },
-    password: {
-        type: DataTypes.TEXT,
-        allowNull: false
-    },
-    email: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-        unique: true
+    {
+        sequelize,
+        modelName : 'Register'
     }
-})
+)
 
 module.exports = Register
