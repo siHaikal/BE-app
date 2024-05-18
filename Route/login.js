@@ -1,18 +1,27 @@
 const express = require('express')
 const router = express.Router()
-const bcrypt = require('bcrypt')
 const passwordCheck = require('../utils/passwordCheck')
+const session = require('express-session')
+
+router.use(session({
+    secret: 'key',
+    resave: false,
+    saveUninitialized: true
+}))
 
 router.post('/', async (req, res) => {
     const { userName, password } = req.body
 
     try {
-        const check = await passwordCheck(userName, password)
-        if(check.validatePassword) {
+        const chec = await passwordCheck(userName, password)
+        if(chec.validatePassword) {
             res.status(200).json({
                 metadata: 'Login Success',
-                data: check.user
-            })
+                data: chec.user
+            })   
+
+            req.session.user = chec
+
         } else {
             res.status(400).json({
                 metadata: 'Username atau password salah'
